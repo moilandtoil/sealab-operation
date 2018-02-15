@@ -1,0 +1,17 @@
+{
+  "name": "@moilandtoil/sealab-operation",
+  "version": "0.0.1",
+  "description": "Logically groups resolvers with typeDefs and adds dependency injection within a construct called an 'Operation'",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/.bin/jest unit"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/moilandtoil/sealab-operations.git"
+  },
+  "devDependencies": {
+    "jest-cli": "^22.2.1"
+  }
+}
