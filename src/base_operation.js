@@ -38,7 +38,7 @@ class BaseOperation {
     if (this.application === null) {
       throw new Error("Application container must be attached to operation");
     }
-    return this.application.logger;
+    return this.application.logger();
   }
 
   debug(message, ...additional) {

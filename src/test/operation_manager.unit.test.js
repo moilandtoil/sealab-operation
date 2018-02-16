@@ -21,9 +21,15 @@ class TestOp extends BaseOperation {
 }
 
 // stub logger to prevent errors
+let stubbedLogger = {
+  debug: function() {},
+  info: function() {},
+  error: function() {}
+};
+
 let stubbedLoggerApplication = {
-  logger: {
-    debug: () => { /* do nothing */ }
+  logger: function() {
+    return stubbedLogger;
   }
 };
 

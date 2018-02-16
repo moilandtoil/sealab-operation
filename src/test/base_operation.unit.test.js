@@ -22,9 +22,15 @@ class TestValid extends BaseOperation {
 class TestInvalid extends BaseOperation {}
 
 // stub logger to prevent errors
+let stubbedLogger = {
+  debug: function() {},
+  info: function() {},
+  error: function() {}
+};
+
 let stubbedLoggerApplication = {
-  logger: {
-    debug: () => { /* do nothing */ }
+  logger: function() {
+    return stubbedLogger;
   }
 };
 
@@ -99,10 +105,12 @@ describe("Extending a base operation", () => {
       testOp.setApplication({
         service: () => { return true },
         conn: () => { return true },
-        logger: {
-          error: logFunc,
-          info: logFunc,
-          debug: logFunc,
+        logger: () => {
+          return {
+            error: logFunc,
+            info: logFunc,
+            debug: logFunc,
+          };
         }
       });
     });
