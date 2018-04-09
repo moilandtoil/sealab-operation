@@ -20,6 +20,23 @@ class TestOp extends BaseOperation {
   }
 }
 
+class TestOp2 extends BaseOperation {
+  constructor() {
+    super();
+    this.name = "TestOp2";
+    this.entrypoint = "Query";
+    this.typeDef = `type test2 {
+      id: ID!
+    }`;
+  }
+
+  resolver(root, args, context) {
+    return {
+      id: context.id
+    };
+  }
+}
+
 // stub logger to prevent errors
 let stubbedLogger = {
   debug: function() {},
@@ -56,6 +73,27 @@ describe("registerOperation", () => {
   test("with valid operation", () => {
     manager.registerOperation(TestOp, stubbedLoggerApplication);
     expect(schemaBuilder.resolvers["TestOp"](null, null, { id: "foo" })).resolves.toHaveProperty("id");
+  });
+
+  test("adding multiple with empty array", () => {
+    expect(() => {
+      manager.registerOperations([], stubbedLoggerApplication);
+    }).not.toThrow();
+    expect(Object.keys(schemaBuilder.resolvers).length).toEqual(0);
+  });
+
+  test("works with one classes", () => {
+    expect(() => {
+      manager.registerOperations([TestOp], stubbedLoggerApplication);
+    }).not.toThrow();
+    expect(Object.keys(schemaBuilder.resolvers).length).toEqual(1);
+  });
+
+  test("works with multiple classes", () => {
+    expect(() => {
+      manager.registerOperations([TestOp, TestOp2], stubbedLoggerApplication);
+    }).not.toThrow();
+    expect(Object.keys(schemaBuilder.resolvers).length).toEqual(2);
   });
 
   test("with invalid operation", () => {

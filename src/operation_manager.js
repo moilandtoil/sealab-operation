@@ -37,6 +37,12 @@ class OperationManager {
     return operation;
   }
 
+  registerOperations(operationClasses, application) {
+    for(let operationClass of operationClasses) {
+      this.registerOperation(operationClass, application);
+    }
+  }
+
   registerPreHook(callback) {
     this.preExecution.push(callback);
   }
