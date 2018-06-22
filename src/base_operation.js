@@ -34,6 +34,10 @@ class BaseOperation {
     }
   }
 
+  guardError(context) {
+    return Promise.reject('Request not authorized, one or more guard validations failed');
+  }
+
   logger() {
     if (this.application === null) {
       throw new Error("Application container must be attached to operation");

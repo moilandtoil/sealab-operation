@@ -25,7 +25,7 @@ class OperationManager {
         let context = result[2];
 
         if (!this.schemaBuilder.validateGuards(operation.guards, context)) {
-          return Promise.reject('Request not authorized, one or more guard validations failed');
+          return operation.guardError(context);
         }
         return config.resolver(root, args, context);
       });
