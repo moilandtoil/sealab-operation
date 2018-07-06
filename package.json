@@ -1,6 +1,6 @@
 {
   "name": "@moilandtoil/sealab-operation",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Logically groups resolvers with typeDefs and adds dependency injection within a construct called an 'Operation'",
   "main": "index.js",
   "scripts": {

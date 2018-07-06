@@ -24,8 +24,10 @@ class OperationManager {
         let args = result[1];
         let context = result[2];
 
-        if (!this.schemaBuilder.validateGuards(operation.guards, context)) {
-          return operation.guardError(context);
+        try {
+          this.schemaBuilder.validateGuards(operation.guards, context);
+        } catch (err) {
+          operation.guardError(err, context);
         }
         return config.resolver(root, args, context);
       });
